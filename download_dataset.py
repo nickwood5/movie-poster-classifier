@@ -10,7 +10,7 @@ def download_image(target_folder, image_name, image_link):
 #          'Western', 'Music', 'Sport', 'Family', 'Film-Noir', 'History', 'Musical', 'Talk-Show', 'War']
 
 # Test array
-genres = ['Animation', 'Action', 'Comedy', 'Adventure', 'Biography']
+genres = ['Animation', 'Drama', 'Action_Adventure', 'Horror_Thriller', 'Comedy', 'Romance', 'Documentary']
 
 def download_dataset(target_folder, csv_name):
     with open(csv_name + '.csv', 'r') as csvfile:
@@ -30,11 +30,15 @@ def download_dataset(target_folder, csv_name):
         for row in data:
             rows.append(row)
 
-        for r in range (1, len(rows)):
-            poster_link = rows[r][0]
-            name = rows[r][1]
-            genre = rows[r][2]
-            year = rows[r][3]
+        for r in range (0, len(rows)):
+
+            row = rows[r]
+            name = row[0]
+            poster_link = row[5]
+            genre = row[2]
+            year = row[1]
+
+
             target_sub_directory = target_folder + '/' + genre
             image_name = name + '_' + year + '_' + genre + '_' + str(genre_counts[genre])
             print("Download image {}".format(image_name))
@@ -42,6 +46,4 @@ def download_dataset(target_folder, csv_name):
             genre_counts[genre] += 1
 
 # Test code to download images from sample csvs
-download_dataset('data/sample_test', 'sample_test_data')
-download_dataset('data/sample_train', 'sample_train_data')
-download_dataset('data/sample_validation', 'sample_validation_data')
+download_dataset('data/sample_test', 'Testing')
