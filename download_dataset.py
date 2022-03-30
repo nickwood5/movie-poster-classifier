@@ -15,11 +15,10 @@ genres = ['Animation', 'Drama', 'Action_Adventure', 'Horror_Thriller', 'Comedy',
 
 def verify_image(target_sub_directory, image_name):
     try:
-        #print('./' + target_sub_directory + '/' + image_name)
         img = Image.open('./' + target_sub_directory + '/' + image_name + '.jpg')
         img.verify()
     except OSError:
-        print("{} is bad".format(image_name))
+        print("{} is badly formatted".format(image_name))
         return False
     return True
 
