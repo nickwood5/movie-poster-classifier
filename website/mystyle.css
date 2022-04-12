@@ -1,7 +1,9 @@
 #Page{
     font-family: sans-serif;
     background: #141414;
-    background-image: url("ai.png");
+    background-image: url("ai.jpeg");
+    background-position: right;
+    background-size: cover;
     background-blend-mode: overlay;
     color: #ffffff;
     align-content: center;
