@@ -1,0 +1,88 @@
+#Page{
+    font-family: sans-serif;
+    background: #141414;
+    background-image: url("ai.png");
+    background-blend-mode: overlay;
+    color: #ffffff;
+    align-content: center;
+  }
+  a{
+    color: #369;
+  }
+  #container {
+    height: 400px;
+    width: 400px;
+    position: relative;
+  }
+  #gallery image {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  #text {
+    z-index: 100;
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    left: 150px;
+    top: 350px;
+  }
+  .note {
+    width: 500px;
+    margin: 50px auto;
+    font-size: 1.1em;
+    color: #333;
+    text-align: justify;
+  }
+  #drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    width: 480px;
+    margin: 50px auto;
+    padding: 20px;
+    align-content: center;
+  }
+  #drop-area.highlight {
+    border-color: purple;
+  }
+  p {
+    margin-top: 0;
+    font-size: 15px;
+    font-family: sans-serif;
+  }
+  .my-form {
+    margin-bottom: 10px;
+    align-content: center;
+  }
+  #gallery {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto;
+    align-content: center;
+  }
+  #gallery img {
+    width: 150px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+    text-align: center;
+    align-content: center;
+  }
+  .button {
+    display: inline-block;
+    padding: 14px;
+    color: #fff;
+    background-color: #942424;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .button:hover {
+    background: darkred;
+  }
+  #progress-bar{
+    width: 150px;
+  }
+  #fileElem {
+    display: none;
+  }
