@@ -3,7 +3,51 @@
 // import React, { useState, useEffect } from 'react';
 
 let dropArea = document.getElementById("drop-area")
+let fileList = window.localStorage.getItem('file')
 var numPosters = 0, data_loaded = 0;
+var savedPosters = [];
+
+//ocument.getElementById('gallery').prepend(localStorage.getItem('container'))
+//handleFiles(localStorage.getItem('movie'))
+//document.getElementById('gallery').prepend((localStorage.getItem('genre')))
+window.onload = () =>{
+    //document.getElementById('gallery').prepend((window.localStorage.getItem("container")))
+
+    var files = localStorage.getItem('files')
+
+    //displayFile(files)
+    //files.forEach(uploadFile)
+    //files.forEach(previewFile)
+    
+    //Get the img
+    var container = document.createElement('container')
+    let img = document.createElement('img')
+    img.src = localStorage.getItem('image');
+    img.style = "width:182px;height:268px"
+    let text = document.createTextNode(localStorage.getItem('genre').slice(0, -2))
+    //let textbox = document.createElement('text')
+    //textbox.id = localStorage.getItem('label')
+    container.appendChild(img)
+    container.appendChild(text)
+    document.getElementById('gallery').prepend(container)
+    //document.getElementById('gallery').prepend(numPosters)
+    //handleFiles(window.localStorage.getItem('img'))
+}
+
+function removeDataFromLocalStorage(){
+  let img = document.createElement('img')
+  localStorage.removeItem('image')
+  localStorage.removeItem('genre')
+  img.src = localStorage.getItem('image');
+  img.style = "width:182px;height:268px"
+  // let text = document.createTextNode(localStorage.getItem('genre').slice(0, -2))
+  // //let textbox = document.createElement('text')
+  // //textbox.id = localStorage.getItem('label')
+  // container.appendChild(img)
+  // container.appendChild(text)
+  // document.getElementById('gallery').prepend(container)
+  location.reload()
+}
 
 // Prevent default drag behaviors
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -74,9 +118,18 @@ function updateProgress(fileNumber, percent) {
 }
 
 function handleFiles(files) {
+  localStorage.setItem('files',files)
   files = [...files]
 
   initializeProgress(files.length)
+  files.forEach(uploadFile)
+  files.forEach(previewFile)
+  files.forEach(saveToLocalStorage)
+  
+}
+
+function displayFile(files){
+  files = [...files]
   files.forEach(uploadFile)
   files.forEach(previewFile)
 }
@@ -85,6 +138,7 @@ function previewFile(file) {
   let reader = new FileReader()
   reader.readAsDataURL(file)
   numPosters += 1
+  //localStorage.setItem("image", reader.result);
   console.log("There are " + numPosters)
   reader.onloadend = function() {
     let container = document.createElement('container')
@@ -92,18 +146,21 @@ function previewFile(file) {
     let img = document.createElement('img')
     img.src = reader.result
 
+    localStorage.setItem("image", reader.result);
     img.style = "width:182px;height:268px"
+
     let textbox = document.createElement('text')
     textbox.id = numPosters.toString()
-    //var text = document.createTextNode("This just got added");
+    localStorage.setItem("label",JSON.stringify(numPosters.toString()));
     container.appendChild(img)
     container.appendChild(textbox)
-    
     document.getElementById('gallery').prepend(container)
-    
-    //document.getElementById('gallery').appendChild(text)
   }
 }
+function saveToLocalStorage(items){
+    localStorage.setItem("container",JSON.stringify(items));
+    //document.getElementById('gallery').prepend("Saved to storage")
+  }
 
 function uploadFile(file, i) {
   var url = 'https://nickwood5.pythonanywhere.com/upload2'
@@ -127,9 +184,11 @@ function uploadFile(file, i) {
   })
 
   formData.append('file', file)
+  window.localStorage.setItem('file',JSON.stringify(file))
   xhr.send(formData)
   xhr.onload = () => {
       let result = JSON.parse(xhr.responseText)
+      
       data_loaded += 1
       console.log(result)
       
@@ -138,8 +197,10 @@ function uploadFile(file, i) {
         var text = document.createTextNode("Unsupported file extension");
       } else {
         predictions = result['predictions']
-        var string = ""
-      
+
+          var string = ""
+
+        
         for (let i = 0; i < predictions.length; i++) {
             console.log(predictions[i])
             //var text = document.createTextNode(predictions[i] + "\n");
@@ -148,6 +209,7 @@ function uploadFile(file, i) {
             //container.appendChild(text)
             string = string.replace("_", "/")
             var text = document.createTextNode(string.slice(0, -2));
+            localStorage.setItem('genre',JSON.stringify(string))
         }
       }
 
@@ -155,5 +217,6 @@ function uploadFile(file, i) {
       var container = document.getElementById(data_loaded.toString())
 
       container.appendChild(text)
+      localStorage.setItem('container',text)
   }
 }

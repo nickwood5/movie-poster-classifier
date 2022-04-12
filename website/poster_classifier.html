@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script type="text/javascript" src="drop.js" defer type="module"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
+<script></script>
+</head><br>
 <title>Movie Poster Classifier</title>
 
 <body id="Page" data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -20,15 +21,21 @@
   </svg>
 </h1>
 </div>
-<div id="drop-area">
-    <form class="my-form">
+<div class="container-fluid text-left">
+  <div id="drop-area">
+    <form class="my-form justify-content-center">
       <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed area.</p>
       <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-      <label class="button" for="fileElem">Select files</label>
-    </form>
-    <progress id="progress-bar" max=100 value=0></progress>
+      <div class="container-fluid text-right">
+      <label class="button" for="fileElem">Select files</label><br>
+      <label class="button" onclick="removeDataFromLocalStorage()">Delete files</label><br>
+      <progress id="progress-bar" max=100 value=0></progress>
+    </div>
     <div id="gallery" /></div>
+    </form> 
 </div>
+</div>
+
 </body>
 </html>
 
@@ -38,6 +45,6 @@
   <a class="up-arrow" href="#Page" data-toggle="tooltip" title="TO TOP">
     <span class="glyphicon glyphicon-chevron-up" style="color:#ffffff;"></span>
   </a><br><br>
-  <p style="font-size: 16px; color:#ffffff;"></p>
-  <p style="font-size: 16px; color:#ffffff;">2022 © Movie Poster Classifier.<br> All rights reserved.</p>
+  <p style="font-size: 14px; color:#ffffff;"></p>
+  <p style="font-size: 14px; color:#ffffff;">2022 © Movie Poster Classifier.<br> All rights reserved.</p>
 </footer> 

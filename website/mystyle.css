@@ -1,6 +1,8 @@
 #Page{
     font-family: sans-serif;
     background: #141414;
+    background-image: url("ai.png");
+    background-blend-mode: overlay;
     color: #ffffff;
     align-content: center;
   }
@@ -39,20 +41,25 @@
     width: 480px;
     margin: 50px auto;
     padding: 20px;
+    align-content: center;
   }
   #drop-area.highlight {
     border-color: purple;
   }
   p {
     margin-top: 0;
+    font-size: 15px;
+    font-family: sans-serif;
   }
   .my-form {
     margin-bottom: 10px;
+    align-content: center;
   }
   #gallery {
     margin-top: 10px;
     display: grid;
     grid-template-columns: auto;
+    align-content: center;
   }
   #gallery img {
     width: 150px;
@@ -60,18 +67,21 @@
     margin-right: 10px;
     vertical-align: middle;
     text-align: center;
+    align-content: center;
   }
   .button {
     display: inline-block;
-    padding: 10px;
+    padding: 14px;
     color: #fff;
     background-color: #942424;
     cursor: pointer;
     border-radius: 5px;
-    border: 1px solid #ccc;
   }
   .button:hover {
-    background: #ddd;
+    background: darkred;
+  }
+  #progress-bar{
+    width: 150px;
   }
   #fileElem {
     display: none;
