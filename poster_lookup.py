@@ -1,5 +1,7 @@
 import csv, json
 
+classes = ['Action_Adventure', 'Animation', 'Comedy', 'Documentary', 'Drama', 'Horror_Thriller', 'Romance']
+
 def create_dictionary(csv_name, output_file_name):
     database = {}
     with open(csv_name + '.csv', 'r', encoding="utf-8") as csvfile:
@@ -19,17 +21,28 @@ def create_dictionary(csv_name, output_file_name):
 
             genres = []
 
+            genre_classes = []
+                
+
     
             genres.append(genre_1)
         
 
             genres.append(genre_2)
-        
-
             genres.append(genre_3)
 
-            database[r+1] = genres
+            for genre in classes:
+                if genre in genres:
+                    genre_classes.append(1)
+                else:
+                    genre_classes.append(0)
 
+            print(genre_classes)
+
+            #print(genres)
+
+            database[r+1] = genre_classes
+            
         with open(output_file_name + ".json", "w") as outfile:
             json.dump(database, outfile)
 

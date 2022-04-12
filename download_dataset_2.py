@@ -1,5 +1,6 @@
 import csv, requests, os, shutil
 from PIL import Image
+import numpy as np
 
 def download_image(target_folder, image_name, image_link):
     img_data = requests.get(image_link).content
@@ -9,10 +10,17 @@ def download_image(target_folder, image_name, image_link):
 def verify_image(target_folder, image_name):
     try:
         img = Image.open('./' + target_folder + '/' + image_name + '.jpg')
+       
         img.verify()
+        #mg = np.array(img)
+        if len(img.mode) != 3:
+            print("Image {} has {} channels".format(image_name, len(img.mode)))
+            return False
+        #print("{} has {} channels".format(image_name, len(img.shape)))
     except OSError:
-        print("{} is badly formatted".format(image_name))
+        #print("{} is badly formatted".format(image_name))
         return False
+    #print("{} is good".format(image_name))
     return True
 
 def download_dataset(target_folder, csv_name):
@@ -29,7 +37,7 @@ def download_dataset(target_folder, csv_name):
             poster_link = row[5]
 
             image_name = str(r + 1)
-            print("Download image {}".format(image_name))
+            #print("Download image {}".format(image_name))
             download_image(target_folder, image_name, poster_link)
             good_image = verify_image(target_folder, image_name)
 
@@ -47,6 +55,7 @@ def download_dataset(target_folder, csv_name):
 #verify_dataset('Training')
 
 
-download_dataset('cleaned_data/testing', 'Testing')
+#download_dataset('cleaned_data/testing', 'Testing')
 #download_dataset('cleaned_data/training', 'Training')
 #download_dataset('cleaned_data/validation', 'Verification')
+
